@@ -5,6 +5,7 @@ import './content/css/style.css';
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux';
 import { store } from './store/store';
+import './components/i18n';
 import AppNavbar from "./components/navbar";
 import AppHeader from "./components/header";
 import AppRoutes from "./components/routes";

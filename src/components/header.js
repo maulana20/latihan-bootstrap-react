@@ -1,11 +1,31 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as Icons from "@fortawesome/free-solid-svg-icons"
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useTranslation } from "react-i18next";
 import { store } from '../store/store';
 
 const AppHeader = () => {
+  const { i18n } = useTranslation();
   const [title, setTitle] = useState("");
+  const [language, setLanguage] = useState("en");
   store.subscribe(() => setTitle(store.getState().common.title));
+  
+  const changeLanguage = event => {
+    const code = event.currentTarget.dataset.lang
+    console.log(code)
+    handleLanguage(code)
+  }
+  
+  const handleLanguage = code => {
+    i18n.changeLanguage(code)
+    setLanguage(code)
+    localStorage.setItem("lang", code)
+  }
+  
+  useEffect(() => {
+    const lang = localStorage.getItem("lang")
+    if (lang) handleLanguage(lang)
+  }, []);
   
   return (
     <header className="header">
@@ -14,6 +34,15 @@ const AppHeader = () => {
           {title}
         </div>
         <div className="header__menu-list">
+          <div className="header__menu dropdown" style={{zIndex: '1'}}>
+            <span id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {language}
+            </span>
+            <ul className="dropdown-menu" aria-labelledby="userMenu" style={{minWidth: '0', padding: '10px'}}>
+              <li data-lang="en" onClick={changeLanguage}>en</li>
+              <li data-lang="id" onClick={changeLanguage}>id</li>
+            </ul>
+          </div>
           <div className="header__menu">
             <a href="#">
               <div>
