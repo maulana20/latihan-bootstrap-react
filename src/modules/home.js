@@ -8,7 +8,7 @@ import { ListGroup } from 'react-bootstrap';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const [favorites, setFavorites] = useState("");
+  const [favorites, setFavorites] = useState([]);
   
   const getTodo = async () => {
     let response = await fetch("https://jsonplaceholder.typicode.com/todos");
@@ -39,7 +39,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(setTitle('Get Started'));
     fetchTodo();
-    setFavorites(JSON.parse(localStorage.getItem("favorites")));
+    if (JSON.parse(localStorage.getItem("favorites"))) setFavorites(JSON.parse(localStorage.getItem("favorites")));
   }, []);
   
   return (
