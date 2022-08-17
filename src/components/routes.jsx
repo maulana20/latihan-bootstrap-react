@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Home from '../modules/home';
 import Notfound from '../modules/notfound';
+import ResetPassword from '../modules/auth/reset-password';
 
 const AppRoutes = () => {
   return (
@@ -9,6 +10,7 @@ const AppRoutes = () => {
       <div className="content__section-content container-fluid">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/auth/reset-password" element={<ResetPassword />} />
           <Route path="/*" element={<Notfound />} />
         </Routes>
       </div>

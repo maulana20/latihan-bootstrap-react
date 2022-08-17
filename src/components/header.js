@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { store } from '../store/store';
 
 const AppHeader = () => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const [title, setTitle] = useState("");
   const [language, setLanguage] = useState("en");
   store.subscribe(() => setTitle(store.getState().common.title));
@@ -57,6 +57,7 @@ const AppHeader = () => {
               <FontAwesomeIcon className="fa-solid fa-xs" icon={Icons.faChevronDown} />
             </a>
             <ul className="dropdown-menu" aria-labelledby="userMenu">
+              <li><a className="dropdown-item" href="/auth/reset-password">{t("Reset Password")}</a></li>
               <li><a className="dropdown-item" href="#">Login</a></li>
             </ul>
           </div>
